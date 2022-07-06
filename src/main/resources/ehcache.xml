@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd">
+
+    <!-- 名为helloworld的缓存，最大堆存储为50M，存活时间100秒 -->
+    <cache name="HelloWorldCache"
+           maxBytesLocalHeap="50m"
+           timeToLiveSeconds="100"/>
+</ehcache>

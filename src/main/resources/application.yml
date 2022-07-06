@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/miaosha?serverTimezone=UTC
+  thymeleaf:
+    cache: false
+  cache:
+    type: redis
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# tomcat 工作线程池最大线程数设置为 1
+server:
+  tomcat:
+    max-threads: 1
+  port: 20013
+  servlet:
+    context-path: /lmc
+    session:
+      cookie:
+        name: lmc
+
+custom:
+  fyaj:
+    # 第三方公司提供的增量数据的接口
+    url: http://2.208.64.254:8090/channel/gG2foEk5lz/services/FgwServices?wsdl
