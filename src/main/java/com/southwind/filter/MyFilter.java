@@ -1,28 +1,19 @@
 package com.southwind.filter;
 
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.southwind.service.impl.YwService;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.servlet.*;
+import java.io.IOException;
 
 /**
  * @author 吕茂陈
  * @date 2022/03/01 15:59
  */
 @Slf4j
-@Component
+//@Component
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class MyFilter implements Filter {
 

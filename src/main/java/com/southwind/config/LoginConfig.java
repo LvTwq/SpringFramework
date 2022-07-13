@@ -1,13 +1,8 @@
 package com.southwind.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import com.southwind.interceptor.MyInterceptor;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @author 吕茂陈
@@ -27,20 +22,20 @@ public class LoginConfig implements WebMvcConfigurer {
 //        registration.addPathPatterns("/**");
 //    }
 
-    @Bean
-    public MyInterceptor getMyInterceptor() {
-        log.info("注入了MyInterceptor！！！");
-        return new MyInterceptor();
-    }
+//    @Bean
+//    public MyInterceptor getMyInterceptor() {
+//        log.info("注入了MyInterceptor！！！");
+//        return new MyInterceptor();
+//    }
 
     /**
      * 注册拦截器
      *
      * @param registry
      */
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new JwtLoginInterceptor());
-        registry.addInterceptor(getMyInterceptor()).addPathPatterns("/**");
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+////        registry.addInterceptor(new JwtLoginInterceptor());
+//        registry.addInterceptor(getMyInterceptor()).addPathPatterns("/**");
+//    }
 }

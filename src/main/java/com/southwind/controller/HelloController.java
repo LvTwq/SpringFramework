@@ -1,5 +1,9 @@
 package com.southwind.controller;
 
+import com.southwind.service.SayService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +14,39 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.hutool.json.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+
 /**
  * @author 吕茂陈
  * @date 2022/02/17 18:11
  */
 @Slf4j
 @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-@RestController()
+@RestController
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class HelloController {
+
+    private final List<SayService> sayServiceList;
+
+    private final ApplicationContext applicationContext;
+
+    /**
+     * 单例的 controller 注入的 service 也是一次性创建的，即使 service 本身标识了 prototype 也没用
+     * 只能让 service 以代理方式注入，这样虽然 controller 本身是单例的，但每次都能从代理获取 service
+     * 调试可以发现，注入的 service 是 spring 生成的代理类
+     */
+    @GetMapping("test")
+    public void test() {
+        log.info("====================");
+        sayServiceList.forEach(SayService::say);
+    }
+
+
+    @GetMapping("test2")
+    public void test2() {
+        log.info("====================");
+        applicationContext.getBeansOfType(SayService.class).values().forEach(SayService::say);
+    }
 
     @GetMapping("good")
     public ResponseEntity<JSONObject> good() {
@@ -48,4 +77,6 @@ public class HelloController {
         jsonObject.putOnce("success", false);
         return jsonObject;
     }
+
+
 }

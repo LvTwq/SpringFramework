@@ -1,23 +1,20 @@
 package com.southwind.interceptor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
+import com.southwind.service.impl.YwService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.southwind.service.impl.YwService;
-
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author 吕茂陈
  * @date 2022/03/01 16:02
  */
 @Slf4j
-@Component
+//@Component
 public class MyInterceptor implements HandlerInterceptor {
 
     @Autowired

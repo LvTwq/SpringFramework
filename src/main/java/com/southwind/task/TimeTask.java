@@ -1,12 +1,11 @@
 package com.southwind.task;
 
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
-
 import cn.hutool.extra.spring.SpringUtil;
 import cn.hutool.system.HostInfo;
 import cn.hutool.system.SystemUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 
 /**
  * @author 吕茂陈
@@ -31,7 +30,7 @@ public class TimeTask {
 
         String downUrl = String.format("http://%s:%s/wj/action/download/tzh/", ip, port);
 
-        System.out.println(downUrl + "123456");
+        log.info("{}", downUrl);
 
     }
 }

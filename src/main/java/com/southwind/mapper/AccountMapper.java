@@ -2,8 +2,10 @@ package com.southwind.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.southwind.entity.Account;
-import org.springframework.stereotype.Repository;
 
+/**
+ * @author 吕茂陈
+ */
 public interface AccountMapper extends BaseMapper<Account> {
 
 }

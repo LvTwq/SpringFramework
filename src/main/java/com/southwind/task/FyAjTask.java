@@ -1,27 +1,22 @@
 package com.southwind.task;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
+import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.json.JSONArray;
+import cn.hutool.json.JSONObject;
+import cn.hutool.json.JSONUtil;
+import com.southwind.vo.FyajVo;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 
-import com.southwind.vo.FyajVo;
-
-import cn.hutool.core.io.resource.ResourceUtil;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * @author 吕茂陈
@@ -117,6 +112,24 @@ public class FyAjTask {
         response.close();
         log.info("response:{}", response);
         log.info("string:{}", string);
+    }
+
+
+
+//    @Scheduled(fixedRate = 10000)
+    public void httpClient() throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("file","/C:/Users/Administrator/Desktop/tmp.txt",
+                        RequestBody.create(MediaType.parse("multipart/form-data"),
+                                new File("/C:/Users/Administrator/Desktop/tmp.txt")))
+                .build();
+        Request request = new Request.Builder()
+                .url("http://192.168.101.182:8099/enapi/upload/systeminfo?SystemOS=Windows")
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
     }
 
 }

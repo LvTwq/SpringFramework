@@ -1,14 +1,11 @@
 package com.southwind.realm;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import com.southwind.entity.Account;
+import com.southwind.service.impl.AccountService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
@@ -16,8 +13,8 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.southwind.entity.Account;
-import com.southwind.service.AccountService;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author 吕茂陈
@@ -61,11 +58,11 @@ public class AccountRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         // 把拿到的账号和密码封装成token
-        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        Account account = accountService.findByUsername(token.getUsername());
-        if (account != null) {
-            return new SimpleAuthenticationInfo(account, account.getPassword(), getName());
-        }
+//        UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
+//        Account account = accountService.findByUsername(token.getUsername());
+//        if (account != null) {
+//            return new SimpleAuthenticationInfo(account, account.getPassword(), getName());
+//        }
         return null;
     }
 }

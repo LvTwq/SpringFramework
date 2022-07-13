@@ -6,15 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import com.southwind.annotation.EnableConfig;
-
 import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author 吕茂陈
  */
 @Slf4j
-@EnableConfig
 @EnableScheduling
 @SpringBootApplication
 @MapperScan("com.southwind.mapper")

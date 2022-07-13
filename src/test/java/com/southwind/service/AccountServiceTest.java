@@ -1,19 +1,29 @@
 package com.southwind.service;
 
+import cn.hutool.core.io.resource.ResourceUtil;
+import okhttp3.*;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 @SpringBootTest
 class AccountServiceTest {
 
-    @Autowired
-    private AccountService accountService;
-
     @Test
-    void findByUsername() {
-        System.out.println(accountService.findByUsername("ls"));
+    void httpClient() throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        InputStream inputStream = ResourceUtil.getStream("fyajReq.txt");
+        MediaType mediaType = MediaType.parse("text/plain");
+        RequestBody body = RequestBody.create(mediaType, new File("sql/account.sql"));
+        Request request = new Request.Builder()
+                .url("http://192.168.101.182:8099/enapi/upload/systeminfo?SystemOS=Windows")
+                .method("POST", body)
+                .build();
+        Response response = client.newCall(request).execute();
     }
+
 }
