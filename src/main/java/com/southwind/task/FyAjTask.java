@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 import org.springframework.util.StringUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -116,21 +115,7 @@ public class FyAjTask {
 
 
 
-//    @Scheduled(fixedRate = 10000)
-    public void httpClient() throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder()
-                .build();
-        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                .addFormDataPart("file","/C:/Users/Administrator/Desktop/tmp.txt",
-                        RequestBody.create(MediaType.parse("multipart/form-data"),
-                                new File("/C:/Users/Administrator/Desktop/tmp.txt")))
-                .build();
-        Request request = new Request.Builder()
-                .url("http://192.168.101.182:8099/enapi/upload/systeminfo?SystemOS=Windows")
-                .method("POST", body)
-                .build();
-        Response response = client.newCall(request).execute();
-    }
+
 
 }
 

@@ -1,7 +1,10 @@
 package com.southwind.controller;
 
+import cn.hutool.json.JSONObject;
+import com.southwind.context.ReactiveRequestContextHolder;
 import com.southwind.service.SayService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
@@ -10,9 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import cn.hutool.json.JSONObject;
-import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -63,6 +64,17 @@ public class HelloController {
         return jsonObject;
     }
 
+
+    @GetMapping("good3")
+    public Mono<String> good3(/*ServerWebExchange exchange*/) {
+        log.info("我是controller！！！");
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.putOnce("message", "200");
+
+        return ReactiveRequestContextHolder.getRequest().map(request -> request.getHeaders().getFirst("user"));
+//        return Mono.just(jsonObject);
+    }
+
     @GetMapping("bad")
     public ResponseEntity<JSONObject> bad() {
         JSONObject jsonObject = new JSONObject();
@@ -77,6 +89,7 @@ public class HelloController {
         jsonObject.putOnce("success", false);
         return jsonObject;
     }
+
 
 
 }

@@ -8,6 +8,12 @@ spring:
     cache: false
   cache:
     type: redis
+  rabbitmq:
+    host: 192.168.100.13
+    port: 5672
+    virtual-host: ensbrain_plus
+    username: root
+    password: Enlink@123
 
 mybatis-plus:
   configuration:

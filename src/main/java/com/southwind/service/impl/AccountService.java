@@ -21,7 +21,7 @@ public class AccountService {
     public int findByUsername(String username) {
         QueryWrapper<Account> wrapper = new QueryWrapper<>();
         wrapper.eq("username", username);
-        return accountMapper.selectCount(wrapper);
+        return Math.toIntExact(accountMapper.selectCount(wrapper));
     }
 
 

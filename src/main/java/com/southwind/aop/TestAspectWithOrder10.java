@@ -5,18 +5,15 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 /**
  * @author 吕茂陈
  * @date 2022-07-08 10:23
  */
-@Aspect
-@Component
-@Order(10)
+//@Aspect
+//@Component
+//@Order(10)
 @Slf4j
 public class TestAspectWithOrder10 {
 
