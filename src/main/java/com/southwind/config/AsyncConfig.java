@@ -10,7 +10,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * 开启异步执行
+ * 异步执行配置
  *
  * @author 吕茂陈
  * @date 2022-07-07 11:29

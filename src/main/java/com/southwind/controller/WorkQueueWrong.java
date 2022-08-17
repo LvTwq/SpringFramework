@@ -1,5 +1,6 @@
 package com.southwind.controller;
 
+import cn.hutool.extra.spring.SpringUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.*;
@@ -30,32 +31,39 @@ public class WorkQueueWrong {
     private final RabbitTemplate rabbitTemplate;
 
     private static final String EXCHANGE = "newuserExchange";
+    private static final String QUEUE = "newuserQueue";
 
 
     @GetMapping
     public void sendMessage() {
-        rabbitTemplate.convertAndSend(EXCHANGE, "", UUID.randomUUID().toString());
+        String name = UUID.randomUUID().toString();
+        log.info("生成的name为：{}", name);
+        // 发消息，设置routingKey为空
+        rabbitTemplate.convertAndSend(EXCHANGE, "", name);
     }
 
 
     /**
-     * 使用匿名队列作为消息队列
+     * 使用匿名（随机命名）队列作为消息队列
      */
     @Bean
-    public Queue queue() {
+    public Queue anonymousQueue() {
         return new AnonymousQueue();
     }
 
 
     /**
      * 声明DirectExchange交换器，绑定队列到交换器
+     * 直接交换器根据routingKey对消息进行路由，由于程序每次启动都会创建匿名（随机命名）的队列
+     * 所以如果起两个服务，两个服务都有对应独立的队列，以空routingKey绑定到直接交换器
+     * 直接交换器发现两条队列都匹配，会发给两个
      *
      * @return
      */
     @Bean
     public Declarables declarables() {
         DirectExchange exchange = new DirectExchange(EXCHANGE);
-        return new Declarables(queue(), exchange, BindingBuilder.bind(queue()).to(exchange).with(""));
+        return new Declarables(anonymousQueue(), exchange, BindingBuilder.bind(anonymousQueue()).to(exchange).with(""));
     }
 
 
@@ -64,8 +72,9 @@ public class WorkQueueWrong {
      *
      * @param name
      */
-    @RabbitListener(queues = "#{queue.name}")
+    @RabbitListener(queues = "#{anonymousQueue.name}")
     public void memberService(String name) {
-        log.info("memberService: 欢迎信息从{}发送给用户：{}", System.getProperty("server.port"), name);
+        log.info("memberService: 欢迎信息从{}发送给用户：{}", SpringUtil.getProperty("server.port"), name);
     }
+
 }
