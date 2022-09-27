@@ -1,7 +1,6 @@
 package com.southwind.controller;
 
 import cn.hutool.json.JSONObject;
-import com.southwind.context.ReactiveRequestContextHolder;
 import com.southwind.service.SayService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -66,13 +66,11 @@ public class HelloController {
 
 
     @GetMapping("good3")
-    public Mono<String> good3(/*ServerWebExchange exchange*/) {
+    public Mono<String> good3(ServerWebExchange exchange) {
         log.info("我是controller！！！");
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.putOnce("message", "200");
 
-        return ReactiveRequestContextHolder.getRequest().map(request -> request.getHeaders().getFirst("user"));
-//        return Mono.just(jsonObject);
+//        return ReactiveRequestContextHolder.getRequest().map(request -> request.getHeaders().getFirst("user"));
+        return Mono.just("jsonObject");
     }
 
     @GetMapping("bad")

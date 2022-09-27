@@ -6,13 +6,12 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author 吕茂陈
  * @date 2022-07-15 14:40
  */
-@Configuration
+//@Configuration
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class RabbitConfiguration {
 

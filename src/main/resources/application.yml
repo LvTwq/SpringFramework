@@ -8,38 +8,11 @@ spring:
     cache: false
   cache:
     type: redis
-  rabbitmq:
-    host: 192.168.100.13
-    port: 5672
-    virtual-host: ensbrain_plus
-    username: root
-    password: Enlink@123
-  kafka:
-    bootstrap-servers: 192.168.100.13:9092
-    consumer:
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      fetch-max-wait: 10000
-      fetch-min-size: 10000
-      # 一次最多抓取1000条消息
-      max-poll-records: 1000
-      group-id: audit
-      enable-auto-commit: false # 是否自动提交offset
-    listener:
-      type: batch
-      missing-topics-fatal: false
-      ack-mode: manual_immediate
-    producer:
-      retries: 3
-      batch-size: 163840
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      client-id: log1
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 # tomcat 工作线程池最大设置为 1
 server:
