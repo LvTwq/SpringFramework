@@ -1,19 +1,20 @@
 package com.southwind.service.impl;
 
+import cn.hutool.json.JSONUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.southwind.config.RabbitConfiguration;
 import com.southwind.entity.Account;
 import com.southwind.entity.LoginParam;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.ProducerRecord;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 /**
  * @author 吕茂陈
@@ -27,7 +28,7 @@ public class MessagingService {
     private final ObjectMapper objectMapper;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-    private final RabbitTemplate rabbitTemplate;
+//    private final RabbitTemplate rabbitTemplate;
 
 
     public void sendRegistrationMessage(Account account) throws IOException {
@@ -48,12 +49,58 @@ public class MessagingService {
 
 
     public void sendRegistrationMessage2(Account msg) {
-        rabbitTemplate.convertAndSend(RabbitConfiguration.REGISTER_EXCHANGE, "", msg);
+//        rabbitTemplate.convertAndSend(RabbitConfiguration.REGISTER_EXCHANGE, "", msg);
     }
 
     public void sendLoginMessage2(LoginParam msg) {
         String routingKey = msg.getSuccess() ? "" : "login_failed";
-        rabbitTemplate.convertAndSend(RabbitConfiguration.LOGIN_EXCHANGE, routingKey, msg);
+//        rabbitTemplate.convertAndSend(RabbitConfiguration.LOGIN_EXCHANGE, routingKey, msg);
     }
+
+
+    /**
+     * 可以用 ProducerRecord 包裹，也可以不用
+     */
+    public void sendMessage() {
+        String jsonStr = JSONUtil.toJsonStr(Account.builder().id(1).username("myTopic").build());
+        // 调用 send() 方法实际上返回的是 ListenableFuture 对象
+        kafkaTemplate.send("myTopic", jsonStr);
+
+        // 同步发送，可以拿到消息发送的结果（不推荐，没利用到Future对象的特性）
+        try {
+            String jsonStr2 = JSONUtil.toJsonStr(Account.builder().id(1).username("myTopic2").build());
+            SendResult<String, String> result = kafkaTemplate.send("myTopic2", jsonStr2).get();
+            if (result.getRecordMetadata() != null) {
+                log.info("生产者成功发送消息到：{}",
+                    result.getProducerRecord().topic() + "-> " + result.getProducerRecord().value());
+            }
+        } catch (Exception e) {
+            log.error("生产者发送失败", e);
+        }
+
+        String jsonStr3 = JSONUtil.toJsonStr(Account.builder().id(1).username("myTopic3").build());
+        // 优化
+        ListenableFuture<SendResult<String, String>> myTopic3 = kafkaTemplate.send("myTopic3", jsonStr3);
+        myTopic3.addCallback(new ListenableFutureCallback<SendResult<String, String>>() {
+
+            @Override
+            public void onFailure(Throwable ex) {
+                log.error("生产者发送消息失败", ex);
+            }
+
+            @Override
+            public void onSuccess(SendResult<String, String> result) {
+                log.info("生产者成功发送消息到：{}",
+                    result.getProducerRecord().topic() + "-> " + result.getProducerRecord().value());
+            }
+        });
+
+        String jsonStr4 = JSONUtil.toJsonStr(Account.builder().id(100).username("myTopic4").build());
+        ProducerRecord<String, String> record = new ProducerRecord<>("myTopic4", jsonStr4);
+        kafkaTemplate.send(record);
+
+
+    }
+
 
 }

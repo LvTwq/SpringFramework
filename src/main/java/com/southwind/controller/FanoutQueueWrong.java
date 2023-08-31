@@ -2,20 +2,11 @@ package com.southwind.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Declarables;
-import org.springframework.amqp.core.FanoutExchange;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 /**
  * @author 吕茂陈
@@ -30,31 +21,31 @@ import java.util.UUID;
 public class FanoutQueueWrong {
     private static final String QUEUE = "newuser";
     private static final String EXCHANGE = "newuser";
-    private final RabbitTemplate rabbitTemplate;
+//    private final RabbitTemplate rabbitTemplate;
 
     @GetMapping
     public void sendMessage() {
-        rabbitTemplate.convertAndSend(EXCHANGE, "", UUID.randomUUID().toString());
+//        rabbitTemplate.convertAndSend(EXCHANGE, "", UUID.randomUUID().toString());
     }
 
 
     /**
      * 声明广播交换器FanoutExchange，然后绑定到队列，FanoutExchange绑定队列的时候不需要routingKey
      */
-    @Bean
-    public Declarables declarables2() {
-        Queue queue = new Queue(QUEUE);
-        FanoutExchange exchange = new FanoutExchange(EXCHANGE);
-        return new Declarables(queue, exchange,
-                BindingBuilder.bind(queue).to(exchange));
-    }
+//    @Bean
+//    public Declarables declarables2() {
+//        Queue queue = new Queue(QUEUE);
+//        FanoutExchange exchange = new FanoutExchange(EXCHANGE);
+//        return new Declarables(queue, exchange,
+//                BindingBuilder.bind(queue).to(exchange));
+//    }
 
     /**
      * 会员服务实例1
      *
      * @param userName
      */
-    @RabbitListener(queues = QUEUE)
+//    @RabbitListener(queues = QUEUE)
     public void memberService1(String userName) {
         log.info("memberService1: welcome message sent to new user {}", userName);
 
@@ -65,30 +56,30 @@ public class FanoutQueueWrong {
      *
      * @param userName
      */
-    @RabbitListener(queues = QUEUE)
-    public void memberService2(String userName) {
-        log.info("memberService2: welcome message sent to new user {}", userName);
-
-    }
+//    @RabbitListener(queues = QUEUE)
+//    public void memberService2(String userName) {
+//        log.info("memberService2: welcome message sent to new user {}", userName);
+//
+//    }
 
     /**
      * 营销服务实例1
      *
      * @param userName
      */
-    @RabbitListener(queues = QUEUE)
-    public void promotionService1(String userName) {
-        log.info("promotionService1: gift sent to new user {}", userName);
-    }
+//    @RabbitListener(queues = QUEUE)
+//    public void promotionService1(String userName) {
+//        log.info("promotionService1: gift sent to new user {}", userName);
+//    }
 
     /**
      * 营销服务实例2
      *
      * @param userName
      */
-    @RabbitListener(queues = QUEUE)
-    public void promotionService2(String userName) {
-        log.info("promotionService2: gift sent to new user {}", userName);
-    }
+//    @RabbitListener(queues = QUEUE)
+//    public void promotionService2(String userName) {
+//        log.info("promotionService2: gift sent to new user {}", userName);
+//    }
 
 }

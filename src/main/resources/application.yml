@@ -8,25 +8,60 @@ spring:
     cache: false
   cache:
     type: redis
+  task:
+    execution:
+      pool:
+        core-size: 10
+        queue-capacity: 100
+  profiles:
+    active: dev
+  application:
+    name: springboot
+
+management:
+  server:
+    port: 2012
+  metrics:
+    enable:
+      all: false # all mean all inner metrics
+    export:
+      prometheus:
+        enabled: true
+    tags: # user define labels only for inner metrics
+      label-1-name: hello
+      label-2-name: world
+      application: springboot
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: [ "prometheus","health" ]
+
+
 
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 
-# tomcat 工作线程池最大设置为 1
+# tomcat 工作线程池最大设置为 200
 server:
   tomcat:
     max-threads: 200
-  port: 20013
+  port: 8080
   servlet:
     context-path: /lmc
     session:
       cookie:
         name: lmc
 
-custom:
-  fyaj:
-    url: http://2.208.64.254:8090/channel/gG2foEk5lz/services/FgwServices?wsdl
 
-clientLog: /home/enlink/clientlog
+
+
+logging:
+  level:
+    root: info

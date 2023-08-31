@@ -10,12 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+
+import static com.southwind.component.ConfigValue.endMomentConfig;
 
 /**
  * @author 吕茂陈
@@ -87,6 +90,20 @@ public class HelloController {
         jsonObject.putOnce("success", false);
         return jsonObject;
     }
+
+
+    @GetMapping("{appName:.+}")
+    public void test01(@PathVariable String appName) {
+        // @PathVariable 对于特殊字符截断，windows-v1.3.1.0004 会被截成 windows-v1.3.1，加上 .+
+        log.info("{}", appName);
+    }
+
+
+    @GetMapping("static")
+    public String getStatic() {
+        return endMomentConfig;
+    }
+
 
 
 

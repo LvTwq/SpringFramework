@@ -1,11 +1,7 @@
 package com.southwind.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.core.*;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
-import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 /**
  * @author 吕茂陈
@@ -26,30 +22,30 @@ public class RabbitConfiguration {
      *
      * @return
      */
-    @Bean
-    public Queue queue() {
-        return new Queue(QUEUE);
-    }
+//    @Bean
+//    public Queue queue() {
+//        return new Queue(QUEUE);
+//    }
 
     /**
      * 交换器
      *
      * @return
      */
-    @Bean
-    public Exchange exchange() {
-        return ExchangeBuilder.directExchange(EXCHANGE).durable(true).build();
-    }
+//    @Bean
+//    public Exchange exchange() {
+//        return ExchangeBuilder.directExchange(EXCHANGE).durable(true).build();
+//    }
 
     /**
      * 绑定
      *
      * @return
      */
-    @Bean
-    public Binding binding() {
-        return BindingBuilder.bind(queue()).to(exchange()).with(ROUTING_KEY).noargs();
-    }
+//    @Bean
+//    public Binding binding() {
+//        return BindingBuilder.bind(queue()).to(exchange()).with(ROUTING_KEY).noargs();
+//    }
 
 
     /**
@@ -59,10 +55,10 @@ public class RabbitConfiguration {
      *
      * @return
      */
-    @Bean
-    public MessageConverter createMessageConverter() {
-        return new Jackson2JsonMessageConverter();
-    }
+//    @Bean
+//    public MessageConverter createMessageConverter() {
+//        return new Jackson2JsonMessageConverter();
+//    }
 
 
     public static final String Q_APP = "q_app";
@@ -71,21 +67,21 @@ public class RabbitConfiguration {
     public static final String REGISTER_EXCHANGE = "registration";
     public static final String LOGIN_EXCHANGE = "login";
 
-    @Bean
-    public Queue sendAppQueue() {
-        // 创建Queue时注意到可配置为持久化（Durable）和非持久化（Transient），当Consumer不在线时，持久化的Queue会暂存消息，非持久化的Queue会丢弃消息
-        return new Queue(Q_APP);
-    }
-
-    @Bean
-    public Queue sendAppMail() {
-        return new Queue(Q_MAIL);
-    }
-
-    @Bean
-    public Queue sendAppSms() {
-        return new Queue(Q_SMS);
-    }
+//    @Bean
+//    public Queue sendAppQueue() {
+//        // 创建Queue时注意到可配置为持久化（Durable）和非持久化（Transient），当Consumer不在线时，持久化的Queue会暂存消息，非持久化的Queue会丢弃消息
+//        return new Queue(Q_APP);
+//    }
+//
+//    @Bean
+//    public Queue sendAppMail() {
+//        return new Queue(Q_MAIL);
+//    }
+//
+//    @Bean
+//    public Queue sendAppSms() {
+//        return new Queue(Q_SMS);
+//    }
 
     /**
      * 在mq控制台配置Binding规则：
@@ -93,10 +89,10 @@ public class RabbitConfiguration {
      *
      * @return
      */
-    @Bean
-    public Exchange registerExchange() {
-        return ExchangeBuilder.directExchange(REGISTER_EXCHANGE).durable(true).build();
-    }
+//    @Bean
+//    public Exchange registerExchange() {
+//        return ExchangeBuilder.directExchange(REGISTER_EXCHANGE).durable(true).build();
+//    }
 
 
     /**
@@ -105,10 +101,10 @@ public class RabbitConfiguration {
      *
      * @return
      */
-    @Bean
-    public Exchange loginExchange() {
-        return ExchangeBuilder.directExchange(LOGIN_EXCHANGE).durable(true).build();
-    }
+//    @Bean
+//    public Exchange loginExchange() {
+//        return ExchangeBuilder.directExchange(LOGIN_EXCHANGE).durable(true).build();
+//    }
 
 
     public static final String QUEUE_TEST = "test";
@@ -119,14 +115,14 @@ public class RabbitConfiguration {
     public static final String DEAD_QUEUE = "deadtest";
     public static final String DEAD_ROUTING_KEY = "deadtest";
 
-    @Bean
-    public Declarables declarablesTest() {
-        Queue queue = new Queue(QUEUE_TEST);
-        DirectExchange directExchange = new DirectExchange(EXCHANGE_TEST);
-        //快速声明一组对象，包含队列、交换器，以及队列到交换器的绑定
-        return new Declarables(queue, directExchange,
-                BindingBuilder.bind(queue).to(directExchange).with(ROUTING_KEY_TEST));
-    }
+//    @Bean
+//    public Declarables declarablesTest() {
+//        Queue queue = new Queue(QUEUE_TEST);
+//        DirectExchange directExchange = new DirectExchange(EXCHANGE_TEST);
+//        //快速声明一组对象，包含队列、交换器，以及队列到交换器的绑定
+//        return new Declarables(queue, directExchange,
+//                BindingBuilder.bind(queue).to(directExchange).with(ROUTING_KEY_TEST));
+//    }
 
 
 //    @Bean

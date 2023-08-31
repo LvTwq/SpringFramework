@@ -5,17 +5,19 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.southwind.vo.FyajVo;
-import lombok.extern.slf4j.Slf4j;
-import okhttp3.*;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
-import org.springframework.util.StringUtils;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
+import org.springframework.util.StringUtils;
 
 /**
  * @author 吕茂陈
@@ -25,7 +27,6 @@ import java.util.List;
 @Component
 public class FyAjTask {
 
-    @Value("${custom.fyaj.url}")
     private String fyajUrl;
 
     /**

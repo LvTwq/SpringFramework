@@ -1,13 +1,8 @@
 package com.southwind.controller;
 
-import cn.hutool.extra.spring.SpringUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.*;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +23,7 @@ import java.util.UUID;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class WorkQueueWrong {
 
-    private final RabbitTemplate rabbitTemplate;
+//    private final RabbitTemplate rabbitTemplate;
 
     private static final String EXCHANGE = "newuserExchange";
     private static final String QUEUE = "newuserQueue";
@@ -39,17 +34,17 @@ public class WorkQueueWrong {
         String name = UUID.randomUUID().toString();
         log.info("生成的name为：{}", name);
         // 发消息，设置routingKey为空
-        rabbitTemplate.convertAndSend(EXCHANGE, "", name);
+//        rabbitTemplate.convertAndSend(EXCHANGE, "", name);
     }
 
 
     /**
      * 使用匿名（随机命名）队列作为消息队列
      */
-    @Bean
-    public Queue anonymousQueue() {
-        return new AnonymousQueue();
-    }
+//    @Bean
+//    public Queue anonymousQueue() {
+//        return new AnonymousQueue();
+//    }
 
 
     /**
@@ -60,11 +55,11 @@ public class WorkQueueWrong {
      *
      * @return
      */
-    @Bean
-    public Declarables declarables() {
-        DirectExchange exchange = new DirectExchange(EXCHANGE);
-        return new Declarables(anonymousQueue(), exchange, BindingBuilder.bind(anonymousQueue()).to(exchange).with(""));
-    }
+//    @Bean
+//    public Declarables declarables() {
+//        DirectExchange exchange = new DirectExchange(EXCHANGE);
+//        return new Declarables(anonymousQueue(), exchange, BindingBuilder.bind(anonymousQueue()).to(exchange).with(""));
+//    }
 
 
     /**
@@ -72,9 +67,9 @@ public class WorkQueueWrong {
      *
      * @param name
      */
-    @RabbitListener(queues = "#{anonymousQueue.name}")
-    public void memberService(String name) {
-        log.info("memberService: 欢迎信息从{}发送给用户：{}", SpringUtil.getProperty("server.port"), name);
-    }
+//    @RabbitListener(queues = "#{anonymousQueue.name}")
+//    public void memberService(String name) {
+//        log.info("memberService: 欢迎信息从{}发送给用户：{}", SpringUtil.getProperty("server.port"), name);
+//    }
 
 }

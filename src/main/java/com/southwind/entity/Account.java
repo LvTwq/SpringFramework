@@ -1,14 +1,16 @@
 package com.southwind.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author 吕茂陈
  */
 @Data
 @Builder
-@ToString
 @TableName("account")
 @NoArgsConstructor
 @AllArgsConstructor

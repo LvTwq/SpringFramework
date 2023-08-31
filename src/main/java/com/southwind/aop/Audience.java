@@ -1,10 +1,14 @@
 package com.southwind.aop;
 
+import java.util.concurrent.TimeUnit;
+import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
-
-import javax.annotation.PostConstruct;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * @author 吕茂陈
@@ -54,6 +58,21 @@ public class Audience {
     @PostConstruct
     public void init() {
         log.info("Audience 初始化！！！！");
+    }
+
+
+    @Pointcut("execution(* com.southwind.service.impl.PerformanceImpl.method()))")
+    public void pointcut() {
+    }
+
+    @Before("pointcut()")
+    public void before() {
+        System.out.println("before");
+        try {
+            Thread.sleep(TimeUnit.SECONDS.toMillis(1));
+        } catch (InterruptedException e) {
+            throw new IllegalStateException();
+        }
     }
 
 }

@@ -9,4 +9,6 @@ public interface Performance {
     String perform();
 
     String stutest(String s1, String s2);
+
+    void method();
 }

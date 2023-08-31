@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimeTask {
 
-    //    @Scheduled(fixedRate = 5000)
-    public void push() {
+//        @Scheduled(fixedRate = 5000)
+    private void push() {
         log.info("每五秒执行定时任务！！！");
     }
 

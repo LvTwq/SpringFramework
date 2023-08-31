@@ -1,16 +1,14 @@
 package com.southwind.controller;
 
+import com.southwind.service.CompactDisc;
+import com.southwind.service.Performance;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.southwind.service.CompactDisc;
-import com.southwind.service.Performance;
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author 吕茂陈
@@ -36,6 +34,16 @@ public class AopController {
     @GetMapping("v2/{id}")
     public int aop02(@PathVariable("id") int id) {
         return compactDisc.playTrack(id);
+    }
+
+
+    @GetMapping("/aop")
+    public String aop() {
+        long begin = System.currentTimeMillis();
+        performance.method();
+        long cost = System.currentTimeMillis() - begin;
+        String cls = performance.getClass().toString();
+        return cls + " | " + cost;
     }
 
 }

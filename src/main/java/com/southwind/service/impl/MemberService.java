@@ -1,9 +1,7 @@
 package com.southwind.service.impl;
 
-import com.southwind.config.RabbitConfiguration;
 import com.southwind.entity.MqUser;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -29,7 +27,7 @@ public class MemberService {
      *
      * @param user
      */
-    @RabbitListener(queues = RabbitConfiguration.QUEUE)
+//    @RabbitListener(queues = RabbitConfiguration.QUEUE)
     public void listen(MqUser user) {
         log.info("接收 mq 用户：{}", user.getId());
         welcome(user);

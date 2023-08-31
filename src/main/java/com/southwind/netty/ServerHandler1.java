@@ -20,8 +20,7 @@ public class ServerHandler1 extends ChannelInboundHandlerAdapter {
 
 
 	/**
-	 * 重写了channelRead读方法，在这个方法内部可以读取客户端的请求信息
-	 * 客户端数据到来时触发
+	 * 重写了channelRead读方法，在这个方法内部可以读取客户端的请求信息 客户端数据到来时触发
 	 *
 	 * @param ctx
 	 * @param msg 封装的信息对象
@@ -36,7 +35,7 @@ public class ServerHandler1 extends ChannelInboundHandlerAdapter {
 		log.info("客户端信息是：{}", body);
 		ByteBuf resp = Unpooled.copiedBuffer("no".getBytes(StandardCharsets.UTF_8));
 		ctx.writeAndFlush(resp)
-				.addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
+			.addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
 	}
 
 
@@ -48,6 +47,7 @@ public class ServerHandler1 extends ChannelInboundHandlerAdapter {
 
 	/**
 	 * 发生异常时触发
+	 *
 	 * @param ctx
 	 * @param cause
 	 * @throws Exception

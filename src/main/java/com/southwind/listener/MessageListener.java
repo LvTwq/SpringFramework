@@ -1,6 +1,7 @@
 package com.southwind.listener;
 
 import com.southwind.event.MessageEvent;
+import java.util.concurrent.CompletableFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageListener implements IEventListener<MessageEvent> {
 
-
 //    @Override
 //    public void onApplicationEvent(MessageEvent messageEvent) {
 //        log.info("用户注册成功，执行监听事件{}", messageEvent.getSource());
@@ -23,6 +23,9 @@ public class MessageListener implements IEventListener<MessageEvent> {
     @Override
     public void handler(MessageEvent event) {
         // 注意看执行的线程：SimpleAsyncTaskExecutor-xx
-        log.info("用户注册成功，执行监听事件{}", event.getMsgId());
+        CompletableFuture.runAsync(() -> {
+            log.info("用户注册成功，执行监听事件{}", event.getMsgId());
+        });
+
     }
 }
