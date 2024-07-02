@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: root
-    url: jdbc:mysql://localhost:3306/miaosha?serverTimezone=UTC
+    password: Enlink@123
+    username: enlink
+    url: jdbc:mysql://192.168.114.214:33060/ensecdns_admin?characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
   thymeleaf:
     cache: false
   cache:
@@ -16,32 +16,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: springboot
-
-management:
-  server:
-    port: 2012
-  metrics:
-    enable:
-      all: false # all mean all inner metrics
-    export:
-      prometheus:
-        enabled: true
-    tags: # user define labels only for inner metrics
-      label-1-name: hello
-      label-2-name: world
-      application: springboot
-  endpoint:
-    metrics:
-      enabled: true
-    prometheus:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: [ "prometheus","health" ]
-
-
+    name: lvmc-server
 
 mybatis-plus:
   configuration:
@@ -53,15 +28,13 @@ server:
   tomcat:
     max-threads: 200
   port: 8080
-  servlet:
-    context-path: /lmc
-    session:
-      cookie:
-        name: lmc
-
-
 
 
 logging:
   level:
     root: info
+
+
+log:
+  file:
+    path: /home/spring/logs

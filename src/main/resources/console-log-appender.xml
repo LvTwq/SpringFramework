@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<!-- Console 输出设置 -->
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+		<!-- 过滤掉非debug的日志 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>debug</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>NEUTRAL</onMismatch>
+		</filter>
+	</appender>
+	<!--开启logback异步记录日志-->
+	<appender name="async-console" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="CONSOLE"/>
+		<includeCallerData>true</includeCallerData>
+	</appender>
+</included>
