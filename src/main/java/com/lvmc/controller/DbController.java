@@ -25,13 +25,5 @@ public class DbController {
     @GetMapping("oracle")
     public void oracle() {
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        dataSource.setUrl("");
-        dataSource.setUsername("system");
-        dataSource.setPassword("oracle");
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        List<Map<String, Object>> maps = jdbcTemplate.queryForList("");
-        log.info("{}", JackJsonUtil.obj2String(maps));
     }
 }
