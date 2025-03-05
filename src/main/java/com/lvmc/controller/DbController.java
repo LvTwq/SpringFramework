@@ -24,15 +24,14 @@ public class DbController {
 
     @GetMapping("oracle")
     public void oracle() {
-        String url = "jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.lvmc.top)(PORT=1521))(CONNECT_DATA=(SERVICE_NAME=ORCLPDB)))";
-        log.info("南通公安数据导入，数据库连接信息，{}", url);
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-        dataSource.setUrl(url);
+        dataSource.setUrl("");
         dataSource.setUsername("system");
         dataSource.setPassword("oracle");
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        List<Map<String, Object>> maps = jdbcTemplate.queryForList("select * from HJ_GW.TLPT_ORG where ORG_CODE = '320684660100'");
+        List<Map<String, Object>> maps = jdbcTemplate.queryForList("");
         log.info("{}", JackJsonUtil.obj2String(maps));
     }
 }
