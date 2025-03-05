@@ -1,7 +1,7 @@
 package com.lvmc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lvmc.entity.Account;
+import com.lvmc.po.Account;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

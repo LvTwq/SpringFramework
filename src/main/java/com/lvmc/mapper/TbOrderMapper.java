@@ -1,7 +1,7 @@
 package com.lvmc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lvmc.entity.TbOrderPO;
+import com.lvmc.po.TbOrderPO;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

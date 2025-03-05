@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import static cn.hutool.core.date.DatePattern.NORM_DATETIME_PATTERN;
  * @date 2023/7/12 15:01
  */
 @Slf4j
+@UtilityClass
 public class JackJsonUtil {
 
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();

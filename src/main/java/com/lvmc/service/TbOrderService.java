@@ -1,7 +1,7 @@
 package com.lvmc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lvmc.entity.TbOrderPO;
+import com.lvmc.po.TbOrderPO;
 
 /**
  * 订单表(TbOrder)表服务接口

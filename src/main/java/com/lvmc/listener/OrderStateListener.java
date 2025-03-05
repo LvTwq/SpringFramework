@@ -2,7 +2,7 @@ package com.lvmc.listener;
 
 import com.lvmc.constant.OrderStatus;
 import com.lvmc.constant.OrderStatusChangeEvent;
-import com.lvmc.entity.TbOrderPO;
+import com.lvmc.po.TbOrderPO;
 import com.lvmc.mapper.TbOrderMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

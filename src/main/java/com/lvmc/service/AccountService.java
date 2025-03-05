@@ -1,7 +1,7 @@
 package com.lvmc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.lvmc.entity.Account;
+import com.lvmc.po.Account;
 
 /**
  * (Account)表服务接口

@@ -1,6 +1,6 @@
 package com.lvmc.controller;
 
-import com.lvmc.entity.Account;
+import com.lvmc.po.Account;
 import com.lvmc.entity.LoginParam;
 import com.lvmc.service.impl.MessagingService;
 import java.io.IOException;

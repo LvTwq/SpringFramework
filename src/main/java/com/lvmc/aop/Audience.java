@@ -67,7 +67,7 @@ public class Audience {
 
     @Before("pointcut()")
     public void before() {
-        System.out.println("before");
+        log.info("before");
         try {
             Thread.sleep(TimeUnit.SECONDS.toMillis(1));
         } catch (InterruptedException e) {

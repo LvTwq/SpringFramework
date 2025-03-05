@@ -1,7 +1,7 @@
 package com.lvmc.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.lvmc.entity.Account;
+import com.lvmc.po.Account;
 import com.lvmc.mapper.AccountMapper;
 import com.lvmc.service.AccountService;
 import org.springframework.stereotype.Service;

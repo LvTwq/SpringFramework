@@ -1,6 +1,6 @@
 package com.lvmc.controller;
 
-import com.lvmc.entity.TbOrderPO;
+import com.lvmc.po.TbOrderPO;
 import com.lvmc.service.TbOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;

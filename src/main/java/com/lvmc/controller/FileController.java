@@ -25,7 +25,7 @@ import java.util.List;
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class FileController {
 
-    @Value("${clientLog}")
+    @Value("${clientLog:/home/spring/clientlog}")
     private String path;
 
     @PostMapping("upload")

@@ -1,9 +1,4 @@
 spring:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    password: Enlink@123
-    username: enlink
-    url: jdbc:mysql://192.168.114.214:33060/ensecdns_admin?characterEncoding=UTF-8&allowMultiQueries=true&autoReconnect=true
   thymeleaf:
     cache: false
   cache:
@@ -18,6 +13,16 @@ spring:
   application:
     name: lvmc-server
 
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
@@ -26,8 +31,9 @@ mybatis-plus:
 # tomcat 工作线程池最大设置为 200
 server:
   tomcat:
-    max-threads: 200
-  port: 8080
+    threads:
+      max: 200
+  port: 80
 
 
 logging:

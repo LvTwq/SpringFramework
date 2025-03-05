@@ -2,7 +2,6 @@ package com.lvmc.controller;
 
 import com.lvmc.annotation.SimpleRateLimit;
 import com.lvmc.component.RedisDistributedLock;
-import com.taptap.ratelimiter.annotation.RateLimit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ public class RateLimitTestController {
 	}
 
 
-	//	@SimpleRateLimit(limit = 5)
-	@RateLimit(rate = 5, rateInterval = "10s")
 	@GetMapping("/limit1")
 	public String limit1() {
 		log.info("limit1");

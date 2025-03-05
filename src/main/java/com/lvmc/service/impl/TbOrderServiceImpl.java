@@ -3,7 +3,7 @@ package com.lvmc.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lvmc.constant.OrderStatus;
 import com.lvmc.constant.OrderStatusChangeEvent;
-import com.lvmc.entity.TbOrderPO;
+import com.lvmc.po.TbOrderPO;
 import com.lvmc.mapper.TbOrderMapper;
 import com.lvmc.service.TbOrderService;
 import lombok.RequiredArgsConstructor;

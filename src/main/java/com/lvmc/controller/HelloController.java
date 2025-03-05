@@ -2,8 +2,6 @@ package com.lvmc.controller;
 
 import cn.hutool.json.JSONObject;
 import com.lvmc.service.SayService;
-import com.lvmc.service.SubTestService;
-import com.lvmc.service.TestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +84,7 @@ public class HelloController {
     }
 
 
-    @GetMapping("{appName:.+}")
+    @GetMapping("/str/{appName:.+}")
     public void test01(@PathVariable String appName) {
         // @PathVariable 对于特殊字符截断，windows-v1.3.1.0004 会被截成 windows-v1.3.1，加上 .+
         log.info("{}", appName);
@@ -99,14 +97,6 @@ public class HelloController {
     }
 
 
-    private final TestService testService;
-    private final SubTestService subTestService;
-
-    @GetMapping("test/service")
-    public void testService() {
-        testService.test();
-        subTestService.test();
-    }
 
 
 }

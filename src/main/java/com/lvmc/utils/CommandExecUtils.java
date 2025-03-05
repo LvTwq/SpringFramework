@@ -3,6 +3,7 @@ package com.lvmc.utils;
 import cn.hutool.core.util.CharUtil;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.lvmc.vo.CommonResultVo;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 
@@ -20,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @date 2023/7/12 15:07
  */
 @Slf4j
+@UtilityClass
 public class CommandExecUtils {
 
     /**

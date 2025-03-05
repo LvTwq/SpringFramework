@@ -1,12 +1,11 @@
 package com.lvmc;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author 吕茂陈
@@ -18,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 public class SpringbootShiroApplication {
 
     public static void main(String[] args) {
-        log.info("我是启动类！！！！");
         ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringbootShiroApplication.class, args);
         String[] names = applicationContext.getBeanDefinitionNames();
         /*
@@ -27,7 +25,12 @@ public class SpringbootShiroApplication {
         而关闭时，输出 com.lvmc.config.AopConfig@acdcf71
          */
 //        AopConfig aopConfig = applicationContext.getBean(AopConfig.class);
-//        System.out.println(aopConfig);
+//        log.info(aopConfig);
+
     }
+
+
+
+
 
 }

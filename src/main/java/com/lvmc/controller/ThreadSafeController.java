@@ -214,7 +214,7 @@ public class ThreadSafeController {
                     new LinkedBlockingQueue<>(512),
                     new ThreadFactoryBuilder()
                             .setUncaughtExceptionHandler((thread, throwable) -> log.error("{} 线程异常！", thread, throwable))
-                            .setNameFormat("enlink-download-center-%d").build());
+                            .setNameFormat("download-center-%d").build());
 
     @GetMapping("single")
     public void single() {

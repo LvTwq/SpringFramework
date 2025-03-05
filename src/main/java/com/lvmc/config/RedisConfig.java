@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,12 +33,15 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class RedisConfig {
 
+    @Value("${spring.redis.password}")
+    private String password;
+
     @Bean
     public RedissonClient getRedissonClient() {
         Config config = new Config();
         config.useSingleServer()
                 .setAddress("redis://redis.lmc.top:6378")
-                .setPassword("enlink")
+                .setPassword(password)
                 .setDatabase(0);
         return Redisson.create(config);
     }

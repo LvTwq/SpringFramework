@@ -1,6 +1,6 @@
 package com.lvmc.controller;
 
-import com.lvmc.entity.Account;
+import com.lvmc.po.Account;
 import com.lvmc.service.impl.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
