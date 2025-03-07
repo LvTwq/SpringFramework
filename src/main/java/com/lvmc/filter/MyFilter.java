@@ -1,11 +1,13 @@
 package com.lvmc.filter;
 
-import com.lvmc.service.impl.YwService;
+import cn.hutool.extra.servlet.ServletUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -13,11 +15,10 @@ import java.io.IOException;
  * @date 2022/03/01 15:59
  */
 @Slf4j
-//@Component
+@Component
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class MyFilter implements Filter {
 
-    private final YwService ywService;
     /**
      * 容器启动初始化过滤器时被调用，整个生命周期只会被调用一次（这个方法必须成功，不然过滤器不会起作用）
      *
@@ -40,9 +41,10 @@ public class MyFilter implements Filter {
      */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("Filter 处理中！！！");
-        ywService.test();
+        HttpServletRequest servletRequest = (HttpServletRequest) request;
+        String url = servletRequest.getRequestURI();
         chain.doFilter(request, response);
+        log.info("clientIp:{} url：{}", ServletUtil.getClientIP(servletRequest),  url);
     }
 
     /**

@@ -18,10 +18,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: prometheus
-  endpoint:
-    prometheus:
-      enabled: true
+        include: prometheus,health,metrics
+  metrics:
+    export:
+      prometheus:
+        enabled: true
 
 mybatis-plus:
   configuration:
